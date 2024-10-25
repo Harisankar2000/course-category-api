@@ -15,13 +15,13 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI) // Use the connection string from .env
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log('MongoDB connected successfully.');
     })
     .catch((error) => {
         console.error('MongoDB connection failed:', error.message);
-        process.exit(1); // Exit process with failure
+        process.exit(1);
     });
 
 // Routes
