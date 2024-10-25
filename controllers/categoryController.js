@@ -1,4 +1,4 @@
-const { Category} = require('../models/Category');
+const Category = require('../models/Category');
 
 // Add a new category
 const addCategory = async (req, res) => {
@@ -35,6 +35,7 @@ const getCategoryById = async (req, res) => {
     try {
         const { id } = req.params;
         const category = await Category.findById(id).populate('subCategories');
+        console.log("category",category);
 
         if (!category) {
             return res.status(404).json({ message: 'Category not found' });
@@ -52,7 +53,7 @@ const listCategoriesWithSubCounts = async (req, res) => {
         const categories = await Category.aggregate([
             {
                 $lookup: {
-                    from: 'subcategories', // Collection name in MongoDB
+                    from: 'subcategories',
                     localField: '_id',
                     foreignField: 'category', // Field in subcategory that references category
                     as: 'subCategories'

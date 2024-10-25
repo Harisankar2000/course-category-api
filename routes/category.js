@@ -8,13 +8,13 @@ const {
 } = require('../controllers/categoryController');
 
 // Add a new category
-router.post('/', addCategory);
+router.post('/categories', addCategory);
 
 // Edit an existing category
-router.put('/:id', editCategory);
+router.put('/categories/:id', editCategory);
 
 // Get a category by ID
-router.get('/:id', getCategoryById);
+router.get('/categories/:id', getCategoryById);
 
 // List all categories with subcategory counts
 router.get('/subcount', listCategoriesWithSubCounts);
