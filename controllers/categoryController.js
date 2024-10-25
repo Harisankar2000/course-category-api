@@ -1,4 +1,5 @@
 const Category = require('../models/Category');
+const SubCategory = require('../models/SubCategory');
 
 // Add a new category
 const addCategory = async (req, res) => {
@@ -34,6 +35,7 @@ const editCategory = async (req, res) => {
 const getCategoryById = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log("before query")
         const category = await Category.findById(id).populate('subCategories');
         console.log("category",category);
 
