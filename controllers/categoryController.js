@@ -5,9 +5,15 @@ const SubCategory = require('../models/SubCategory');
 const addCategory = async (req, res) => {
     try {
         const { name } = req.body;
+        const isExists = Category.find({name})
+        if(isExists){
+         return res.json({message: "category name is already exists!"})
+        }else{
         const newCategory = new Category({ name });
+        
         await newCategory.save();
         res.status(201).json(newCategory);
+    }
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });
