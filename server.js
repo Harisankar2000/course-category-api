@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const connectDB = require('./config/db');
 const categoryRoutes = require('./routes/category');
 const dotenv = require('dotenv');
 
@@ -14,15 +15,8 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => {
-        console.log('MongoDB connected successfully.');
-    })
-    .catch((error) => {
-        console.error('MongoDB connection failed:', error.message);
-        process.exit(1);
-    });
+// Connect to MongoDB
+connectDB();
 
 // Routes
 app.use('/api', categoryRoutes);
